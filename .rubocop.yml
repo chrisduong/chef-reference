@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   Include:
     - Berksfile
@@ -30,6 +32,6 @@ Style/FileName:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Exclude:
     - '**/metadata.rb'

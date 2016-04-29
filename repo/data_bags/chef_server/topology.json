@@ -1,9 +1,9 @@
 {
   "id": "topology",
   "topology": "tier",
-  "api_fqdn": "chef-reference.chef.co",
-  "analytics_fqdn": "analytics-reference.chef.co",
-  "supermarket_fqdn": "supermarket-reference.chef.co",
-  "compliance_fqdn": "compliance-reference.chef.co",
-  "notification_email": "eng-services@chef.io"
+  "api_fqdn": "chef-reference.local",
+  "analytics_fqdn": "analytics-reference.local",
+  "supermarket_fqdn": "supermarket-reference.local",
+  "compliance_fqdn": "compliance-reference.local",
+  "notification_email": "dung.tran@sentifi.com"
 }

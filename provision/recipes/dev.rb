@@ -1,7 +1,7 @@
 node.default['chef']['provisioning'].tap do |provisioning|
   provisioning['key-name'] = 'vagrant'
   provisioning['machine_options'] = {
-    'vagrant_provider' => 'vmware_fusion'
+    'vagrant_provider' => 'virtualbox'
   }
 
   provisioning['driver'] = {
@@ -16,9 +16,9 @@ node.default['chef']['provisioning'].tap do |provisioning|
 
   provisioning['server-backend-options'] = {
     vagrant_config: <<-VC
-      config.vm.provider "vmware_fusion" do |v|
-        v.vmx["memsize"] = "1024"
-        v.vmx["numvcpus"] = "2"
+      config.vm.provider "virtualbox" do |v|
+        v.memory = "1024"
+        v.cpus = "2"
       end
 
       config.vm.box = "opscode-centos-7.1"
@@ -28,9 +28,9 @@ node.default['chef']['provisioning'].tap do |provisioning|
 
   provisioning['server-frontend-options'] = {
     vagrant_config: <<-VC
-      config.vm.provider "vmware_fusion" do |v|
-        v.vmx["memsize"] = "1024"
-        v.vmx["numvcpus"] = "2"
+      config.vm.provider "virtualbox" do |v|
+        v.memory = "1024"
+        v.cpus = "2"
       end
 
       config.vm.box = "opscode-centos-7.1"
@@ -40,9 +40,9 @@ node.default['chef']['provisioning'].tap do |provisioning|
 
   provisioning['analytics-options'] = {
     vagrant_config: <<-VC
-      config.vm.provider "vmware_fusion" do |v|
-        v.vmx["memsize"] = "1024"
-        v.vmx["numvcpus"] = "2"
+      config.vm.provider "virtualbox" do |v|
+        v.memory = "1024"
+        v.cpus = "2"
       end
 
       config.vm.box = "opscode-centos-7.1"
@@ -52,13 +52,25 @@ node.default['chef']['provisioning'].tap do |provisioning|
 
   provisioning['supermarket-options'] = {
     vagrant_config: <<-VC
-      config.vm.provider "vmware_fusion" do |v|
-        v.vmx["memsize"] = "1024"
-        v.vmx["numvcpus"] = "2"
+      config.vm.provider "virtualbox" do |v|
+        v.memory = "1024"
+        v.cpus = "2"
       end
 
       config.vm.box = "opscode-centos-7.1"
       config.vm.network "private_network", ip: "192.168.80.83"
+    VC
+  }
+
+  provisioning['compliance-options'] = {
+    vagrant_config: <<-VC
+      config.vm.provider "virtualbox" do |v|
+        v.memory = "1024"
+        v.cpus = "2"
+      end
+
+      config.vm.box = "opscode-centos-7.1"
+      config.vm.network "private_network", ip: "192.168.80.84"
     VC
   }
 end

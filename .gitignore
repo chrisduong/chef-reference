@@ -41,3 +41,6 @@ repo/data_bags/secrets/*.json
 .chef/custom.rb
 .chef/hosted.rb
 actor-map.yaml
+
+# My own
+.sync-config*.cson

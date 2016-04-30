@@ -63,6 +63,7 @@ machine_batch do
 end
 
 machine 'server-backend' do
+  machine_options ChefHelpers.get_machine_options(node, 'server-backend')
   chef_config ChefHelpers.use_policyfiles('server-backend')
   action :converge
   converge true
@@ -85,6 +86,7 @@ end
 end
 
 machine 'server-frontend' do
+  machine_options ChefHelpers.get_machine_options(node, 'server-frontend')
   chef_config ChefHelpers.use_policyfiles('server-frontend')
   action :converge
   converge true
@@ -96,6 +98,7 @@ machine 'server-frontend' do
 end
 
 machine 'analytics' do
+  machine_options ChefHelpers.get_machine_options(node, 'analytics')
   chef_config ChefHelpers.use_policyfiles('analytics')
   action :converge
   converge true
@@ -106,6 +109,7 @@ machine 'analytics' do
 end
 
 machine 'supermarket' do
+  machine_options ChefHelpers.get_machine_options(node, 'supermarket')
   chef_config ChefHelpers.use_policyfiles('supermarket')
   action :converge
   converge true
@@ -115,6 +119,7 @@ machine 'supermarket' do
 end
 
 machine 'compliance' do
+  machine_options ChefHelpers.get_machine_options(node, 'compliance')
   chef_config ChefHelpers.use_policyfiles('compliance')
   action :converge
   converge true

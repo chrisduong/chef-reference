@@ -23,6 +23,7 @@ include_recipe 'chef-reference::server-setup'
 # get regenerated content in the private-chef-secrets.json later.
 chef_secrets      = Hash[data_bag_item('secrets', "private-chef-secrets-#{node.chef_environment}")['data'].sort]
 reporting_secrets = Hash[data_bag_item('secrets', "opscode-reporting-secrets-#{node.chef_environment}")['data'].sort]
+pivotal_key       =  data_bag_item('secrets', 'pivotal')['private_key']
 
 # It's easier to deal with a hash rather than a data bag item, since
 # we're not going to need any of the methods, we just need raw data.
@@ -33,6 +34,11 @@ chef_server_config['vips'] = { 'rabbitmq' => node['ipaddress'] }
 chef_server_config['rabbitmq'] = { 'node_ip_address' => '0.0.0.0' }
 
 node.default['chef']['chef-server']['configuration'].merge!(chef_server_config)
+
+file '/etc/opscode/pivotal.pem' do
+  content pivotal_key
+  sensitive true
+end
 
 file '/etc/opscode/private-chef-secrets.json' do
   content JSON.pretty_generate(chef_secrets)

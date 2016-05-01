@@ -62,6 +62,7 @@ end
 
 chef_ingredient 'analytics' do
   config "topology 'standalone'\nanalytics_fqdn '#{analytics_fqdn}'"
+  accept_license true
   notifies :reconfigure, 'chef_ingredient[analytics]'
 end
 

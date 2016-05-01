@@ -46,12 +46,6 @@ file '/etc/opscode/private-chef-secrets.json' do
   sensitive true
 end
 
-file '/etc/opscode-reporting/opscode-reporting-secrets.json' do
-  content JSON.pretty_generate(reporting_secrets)
-  notifies :reconfigure, 'chef_ingredient[reporting]'
-  sensitive true
-end
-
 chef_ingredient 'chef-server' do
   action :install
   config <<-CONFIG
@@ -78,6 +72,18 @@ ingredient_config 'chef-server' do
   action :render
   notifies :reconfigure, 'chef_ingredient[chef-server]'
   notifies :restart, 'omnibus_service[chef-server/rabbitmq]'
+end
+
+# NOTE: safer when Chef Sever is configured correctly first,
+# since opscode-reporting would lookup chef-server-running.json file.
+chef_ingredient 'reporting' do
+  action :install
+end
+
+file '/etc/opscode-reporting/opscode-reporting-secrets.json' do
+  content JSON.pretty_generate(reporting_secrets)
+  notifies :reconfigure, 'chef_ingredient[reporting]'
+  sensitive true
 end
 
 # This is to work around an issue where rabbitmq doesn't always listen
@@ -115,8 +121,4 @@ file '/etc/opscode/pivotal.pem' do
   # not actually work, as it checks the presence of this file.
   only_if { ::File.exist?('/etc/opscode/pivotal.pem') }
   subscribes :create, 'chef_ingredient[chef-server]', :immediately
-end
-
-chef_ingredient 'reporting' do
-  notifies :reconfigure, 'chef_ingredient[reporting]'
 end

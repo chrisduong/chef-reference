@@ -49,6 +49,7 @@ machine 'server-backend' do
   attribute %w(chef chef-server role), 'backend'
   attribute %w(chef chef-server bootstrap enable), true
   action :converge
+  converge true
 end
 
 %w(actions-source.json webui_priv.pem).each do |analytics_file|
@@ -72,6 +73,7 @@ machine 'server-frontend' do
   chef_config ChefHelpers.use_policyfiles('server-frontend')
   attribute %w(chef chef-server role), 'frontend'
   action :converge
+  converge true
   files(
     '/etc/opscode/webui_priv.pem' => '/tmp/stash/webui_priv.pem',
     '/etc/opscode/webui_pub.pem' => '/tmp/stash/webui_pub.pem',
@@ -84,6 +86,7 @@ machine 'analytics' do
   chef_config ChefHelpers.use_policyfiles('analytics')
   attribute %w(chef chef-server role), 'analytics'
   action :converge
+  converge true
   files(
     '/etc/opscode-analytics/actions-source.json' => '/tmp/stash/actions-source.json',
     '/etc/opscode-analytics/webui_priv.pem' => '/tmp/stash/webui_priv.pem'
@@ -95,6 +98,7 @@ machine 'supermarket' do
   chef_config ChefHelpers.use_policyfiles('supermarket')
   attribute %w(chef chef-server role), 'supermarket'
   action :converge
+  converge true
   files(
     '/etc/supermarket/oc-id-applications-supermarket.json' => '/tmp/stash/oc-id-applications-supermarket.json'
   )
@@ -105,6 +109,7 @@ machine 'compliance' do
   chef_config ChefHelpers.use_policyfiles('compliance')
   attribute %w(chef chef-server role), 'compliance'
   action :converge
+  converge true
 end
 
 # We set solo to false in `_setup`, set it back to true here.

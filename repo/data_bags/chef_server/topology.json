@@ -1,9 +1,9 @@
 {
   "id": "topology",
   "topology": "tier",
-  "api_fqdn": "chef-reference.local",
-  "analytics_fqdn": "analytics-reference.local",
-  "supermarket_fqdn": "supermarket-reference.local",
-  "compliance_fqdn": "compliance-reference.local",
+  "api_fqdn": "chef-reference.vagrant.local",
+  "analytics_fqdn": "analytics-reference.vagrant.local",
+  "supermarket_fqdn": "supermarket-reference.vagrant.local",
+  "compliance_fqdn": "compliance-reference.vagrant.local",
   "notification_email": "dung.tran@sentifi.com"
 }

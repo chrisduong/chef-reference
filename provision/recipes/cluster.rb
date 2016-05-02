@@ -29,44 +29,26 @@ end
 machine_batch do
   # need action ready because the default is converge, and the
   # machines are really ready, too.
-  action :converge
-  machine 'server-backend' do
-    machine_options ChefHelpers.get_machine_options(node, 'server-backend')
-    attribute %w(chef chef-server role), 'backend'
-    attribute %w(chef chef-server bootstrap enable), true
-    run_list []
-  end
-
-  machine 'server-frontend' do
-    machine_options ChefHelpers.get_machine_options(node, 'server-frontend')
-    attribute %w(chef chef-server role), 'frontend'
-    run_list []
-  end
-
-  machine 'analytics' do
-    machine_options ChefHelpers.get_machine_options(node, 'analytics')
-    attribute %w(chef chef-server role), 'analytics'
-    run_list []
-  end
-
-  machine 'supermarket' do
-    machine_options ChefHelpers.get_machine_options(node, 'supermarket')
-    attribute %w(chef chef-server role), 'supermarket'
-    run_list []
-  end
-
-  machine 'compliance' do
-    machine_options ChefHelpers.get_machine_options(node, 'compliance')
-    attribute %w(chef chef-server role), 'compliance'
-    run_list []
+  action :ready
+  %w(
+    server-backend
+    server-frontend
+    analytics
+    supermarket
+    compliance
+  ).each do |m|
+    machine m do
+      machine_options ChefHelpers.get_machine_options(node, m)
+    end
   end
 end
 
 machine 'server-backend' do
   machine_options ChefHelpers.get_machine_options(node, 'server-backend')
   chef_config ChefHelpers.use_policyfiles('server-backend')
+  attribute %w(chef chef-server role), 'backend'
+  attribute %w(chef chef-server bootstrap enable), true
   action :converge
-  converge true
 end
 
 %w(actions-source.json webui_priv.pem).each do |analytics_file|
@@ -88,8 +70,8 @@ end
 machine 'server-frontend' do
   machine_options ChefHelpers.get_machine_options(node, 'server-frontend')
   chef_config ChefHelpers.use_policyfiles('server-frontend')
+  attribute %w(chef chef-server role), 'frontend'
   action :converge
-  converge true
   files(
     '/etc/opscode/webui_priv.pem' => '/tmp/stash/webui_priv.pem',
     '/etc/opscode/webui_pub.pem' => '/tmp/stash/webui_pub.pem',
@@ -100,8 +82,8 @@ end
 machine 'analytics' do
   machine_options ChefHelpers.get_machine_options(node, 'analytics')
   chef_config ChefHelpers.use_policyfiles('analytics')
+  attribute %w(chef chef-server role), 'analytics'
   action :converge
-  converge true
   files(
     '/etc/opscode-analytics/actions-source.json' => '/tmp/stash/actions-source.json',
     '/etc/opscode-analytics/webui_priv.pem' => '/tmp/stash/webui_priv.pem'
@@ -111,8 +93,8 @@ end
 machine 'supermarket' do
   machine_options ChefHelpers.get_machine_options(node, 'supermarket')
   chef_config ChefHelpers.use_policyfiles('supermarket')
+  attribute %w(chef chef-server role), 'supermarket'
   action :converge
-  converge true
   files(
     '/etc/supermarket/oc-id-applications-supermarket.json' => '/tmp/stash/oc-id-applications-supermarket.json'
   )
@@ -121,8 +103,8 @@ end
 machine 'compliance' do
   machine_options ChefHelpers.get_machine_options(node, 'compliance')
   chef_config ChefHelpers.use_policyfiles('compliance')
+  attribute %w(chef chef-server role), 'compliance'
   action :converge
-  converge true
 end
 
 # We set solo to false in `_setup`, set it back to true here.

@@ -54,6 +54,7 @@ end
 
 chef_ingredient 'compliance' do
   config "fqdn '#{compliance_fqdn}'"
+  accept_license true
   action [:install, :reconfigure]
 end
 

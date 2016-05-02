@@ -1,5 +1,5 @@
 {
-  "revision_id": "723a23ad14916c038920bb722282732f9b405f4bf8547d18bb67450ce0cb3362",
+  "revision_id": "6723e7924bcd180f11dbf85cd39c515cd2254d9392bc3eff3c972a7a89d27904",
   "name": "chef-reference",
   "run_list": [
     "recipe[chef-reference::default]"
@@ -7,15 +7,15 @@
   "cookbook_locks": {
     "chef-reference": {
       "version": "0.6.0",
-      "identifier": "87112f8953a18f610b9a654ff5e56847d048b55a",
-      "dotted_decimal_identifier": "38018017721033103.27315830493541861.114657646392666",
+      "identifier": "78e51f125729feff35f954ff09defcd3a31b23a5",
+      "dotted_decimal_identifier": "34028918819727870.71835464050346462.277985904763813",
       "source": ".",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": null,
-        "revision": "f9c632490425428f2ca94b61070e1ccfe94e6139",
-        "working_tree_clean": true,
+        "revision": "2afd3aa3d9462086e666a54326dcd336ff289075",
+        "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
 
@@ -130,16 +130,6 @@
       ]
     ],
     "dependencies": {
-      "chef-reference (0.6.0)": [
-        [
-          "chef-ingredient",
-          ">= 0.13.1"
-        ],
-        [
-          "line",
-          ">= 0.0.0"
-        ]
-      ],
       "chef-ingredient (0.15.0)": [
         [
           "apt-chef",
@@ -170,6 +160,16 @@
       ],
       "yum (3.8.2)": [
 
+      ],
+      "chef-reference (0.6.0)": [
+        [
+          "chef-ingredient",
+          ">= 0.13.1"
+        ],
+        [
+          "line",
+          ">= 0.0.0"
+        ]
       ]
     }
   }
